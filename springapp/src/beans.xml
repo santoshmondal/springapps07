@@ -71,5 +71,6 @@
     </tx:advice>
     <aop:config proxy-target-class="true">
             <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.rediff.shibernate.EmployeeDaoSessionFactoryTxn.*(..))"/>
+            <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.rediff.shibernate.EmployeeDao.*(..))"/>
     </aop:config>
 </beans>
