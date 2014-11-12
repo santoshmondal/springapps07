@@ -11,6 +11,7 @@ public class EmployeeDao {
 
 	public void saveEmployee(Employee e) {
 		template.save(e);
+		throw new RuntimeException();
 	}
 
 	public void updateEmployee(Employee e) {
