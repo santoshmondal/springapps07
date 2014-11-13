@@ -21,7 +21,7 @@
 
 	<aop:config>
 		<aop:aspect id="log" ref="logging">
-			<aop:pointcut id="selectAll" expression="execution(* com.rediff.spring.Student.*(..)) and args(name)" />
+			<aop:pointcut id="selectAll" expression="execution(* com.rediff.spring.*.*(..)) and args(name, ..)" />
 			<aop:before pointcut-ref="selectAll" method="beforeAdvice" />
 			<aop:after pointcut-ref="selectAll" method="afterAdvice" />
 		</aop:aspect>
