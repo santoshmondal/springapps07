@@ -7,23 +7,23 @@ public class MainApp {
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 
-		/*EmployeeDao dao = (EmployeeDao) context.getBean("d");
+		EmployeeDao dao = (EmployeeDao) context.getBean("d");
 
 		Employee e = new Employee();
-		e.setId(116);
+		e.setId(124);
 		e.setName("varun");
 		e.setSalary(50000);
 
-		dao.saveEmployee(e);*/
+		dao.saveEmployee(e);
 
-		EmployeeDaoSessionFactory dao = (EmployeeDaoSessionFactory) context.getBean("d1");
+		/*EmployeeDaoSessionFactory dao = (EmployeeDaoSessionFactory) context.getBean("d1");
 
 		Employee e = new Employee();
 		e.setId(121);
 		e.setName("varun2");
 		e.setSalary(50000);
 
-		dao.saveEmployee(e);
+		dao.saveEmployee(e);*/
 
 		/*EmployeeDaoSessionFactoryTxn dao = (EmployeeDaoSessionFactoryTxn) context.getBean("d2");
 
