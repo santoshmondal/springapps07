@@ -22,6 +22,10 @@ public class Student {
 		return name;
 	}
 
+	public String setSomething(String name, int age) {
+		return null;
+	}
+
 	public void printThrowException() {
 		System.out.println("Exception raised");
 		throw new IllegalArgumentException();
