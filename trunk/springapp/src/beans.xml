@@ -20,10 +20,16 @@
 
 
 	<aop:config>
+	    
 		<aop:aspect id="log" ref="logging">
 			<aop:pointcut id="selectAll" expression="execution(* com.rediff.spring.*.*(..)) and args(name, ..)" />
+			<aop:pointcut id="selectAll1" expression="execution(* com.rediff.spring.*.*(..)) " />
+			
 			<aop:before pointcut-ref="selectAll" method="beforeAdvice" />
 			<aop:after pointcut-ref="selectAll" method="afterAdvice" />
+			<aop:around pointcut-ref="selectAll" method="aroundAdvice" />
+			<aop:after-returning pointcut-ref="selectAll1" method="afterReturningAdvice" />
+			 <aop:after-throwing method="afterThrowingAdvice" pointcut-ref="selectAll1" throwing="error"  />
 		</aop:aspect>
 	</aop:config>
 
