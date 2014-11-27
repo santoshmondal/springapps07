@@ -1,7 +1,11 @@
 package com.rediff.shibernate;
 
+import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 
+//session.createCriteria(MyEntity.class).list();
 public class EmployeeDaoSessionFactoryTxn {
 	protected SessionFactory sessionFactory;
 
@@ -15,6 +19,12 @@ public class EmployeeDaoSessionFactoryTxn {
 
 	public void deleteEmployee(Employee e) {
 		sessionFactory.getCurrentSession().delete(e);
+	}
+
+	public List<Employee> listAll() {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Employee.class);
+		List<Employee> list = criteria.list();
+		return list;
 	}
 
 	public SessionFactory getSessionFactory() {

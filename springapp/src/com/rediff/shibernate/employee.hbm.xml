@@ -4,9 +4,9 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="com.rediff.shibernate.Employee" table="emp558">
+	<class name="com.rediff.shibernate.Employee" table="emp123">
 		<id name="id">
-			<generator class="assigned"></generator>
+			<generator class="identity"></generator>
 		</id>
 
 		<property name="name"></property>
