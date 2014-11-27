@@ -1,6 +1,7 @@
 package com.rediff.spring;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 
 public class Logging {
 	/**
@@ -8,7 +9,13 @@ public class Logging {
 	 * execution.
 	 */
 	public void beforeAdvice(JoinPoint jp, String name) {
-		System.out.println("Going to setup student profile :: " + name + " :: " + jp);
+		Object[] args = jp.getArgs();
+		if (args != null) {
+			for (Object obj : args) {
+				System.out.println("BEFORE the help of JoinPoint :: " + obj);
+			}
+		}
+		System.out.println("BEFORE String requset..." + name);
 	}
 
 	/**
@@ -16,21 +23,45 @@ public class Logging {
 	 * execution.
 	 */
 	public void afterAdvice(JoinPoint jp, String name) {
-		System.out.println("Student profile has been setup :: " + name + " :: " + jp);
+		Object[] args = jp.getArgs();
+		if (args != null) {
+			for (Object obj : args) {
+				System.out.println("AFTER the help of JoinPoint :: " + obj);
+			}
+		}
+		System.out.println("After String requset..." + name);
+	}
+
+	public void aroundAdvice(ProceedingJoinPoint jp, String name, Integer id) {
+		try {
+
+			Object[] args = jp.getArgs();
+			if (args != null) {
+				for (Object obj : args) {
+					System.out.println("Arround the help of JoinPoint :: " + obj);
+				}
+			}
+			jp.proceed();
+
+			System.out.println("Around String requset..." + name + " ::  " + id);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 * This is the method which I would like to execute when any method returns.
 	 */
-	public void afterReturningAdvice(Object retVal) {
-		System.out.println("Returning:" + retVal.toString());
+	public void afterReturningAdvice(JoinPoint joinPoint, Object retValue) {
+
+		System.out.println("Returning:" + retValue);
 	}
 
 	/**
-	 * This is the method which I would like to execute if there is an exception
-	 * raised.
+	 * /** This is the method which I would like to execute if there is an
+	 * exception raised.
 	 */
-	public void AfterThrowingAdvice(IllegalArgumentException ex) {
-		System.out.println("There has been an exception: " + ex.toString());
+	public void afterThrowingAdvice(JoinPoint jp, Throwable error) {
+		System.out.println("There has been an exception: " + error.toString());
 	}
 }

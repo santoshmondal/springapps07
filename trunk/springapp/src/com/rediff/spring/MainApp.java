@@ -14,6 +14,8 @@ public class MainApp {
 		student.setName("rajaa");
 		student.setSomething(student.getName(), student.getAge());
 
+		student.setAge(student.getAge());
+
 		// student.printThrowException();
 	}
 }
