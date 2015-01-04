@@ -1,5 +1,8 @@
 package com.rediff.hibernate.refernce;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -9,7 +12,7 @@ import com.rediff.minton.HibernateUtil;
 public class App {
 	public static void main(String[] args) {
 		System.out.println("Hibernate many to many (XML Mapping)");
-		manytoone();
+		onetomany();
 		System.out.println("Done");
 	}
 
@@ -100,6 +103,41 @@ public class App {
 			session.save(student);
 
 			student.setCompany(company);
+			session.save(student);
+
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void onetomany() {
+		try {
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+
+			// 1:M save phone
+			Set<Phone> phone_set = new HashSet<Phone>();
+			Phone p1 = new Phone();
+			p1.setPhone_no("1234");
+			session.save(p1);
+			Phone p2 = new Phone();
+			p2.setPhone_no("22345");
+			session.save(p2);
+
+			phone_set.add(p1);
+			phone_set.add(p2);
+
+			// save student
+			Criteria criteria = session.createCriteria(Student.class);
+			criteria.add(Restrictions.eq("name", "samar"));
+			Student student = (Student) criteria.uniqueResult();
+			if (student == null) {
+				student = new Student();
+				student.setName("samar");
+			}
+			student.setPhone_set(phone_set);
 			session.save(student);
 
 			session.getTransaction().commit();
