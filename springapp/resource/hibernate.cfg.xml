@@ -17,6 +17,17 @@
 
 		<!-- List of XML mapping files -->
 		<mapping resource="com/rediff/shibernate/employee.hbm.xml" />
+		
+		<!-- M:N working -->
+		<!-- <mapping resource="com/rediff/minton/Stock.hbm.xml" />
+    	<mapping resource="com/rediff/minton/Category.hbm.xml" /> -->
+    	
+    	<!-- Complete Reference -->
+    	<mapping resource="com/rediff/hibernate/refernce/student.hbm.xml" />
+    	<mapping resource="com/rediff/hibernate/refernce/address.hbm.xml" />
+    	<mapping resource="com/rediff/hibernate/refernce/company.hbm.xml" />
+    	
+    	
 
 	</session-factory>
 </hibernate-configuration>

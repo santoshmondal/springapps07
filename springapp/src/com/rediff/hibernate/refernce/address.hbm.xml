@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.rediff.hibernate.refernce.Address" table="ref_address">
+		<id name="aid" >
+			<generator class="identity" />
+		</id>
+		
+		<property name="city" type="string" not-null="true" unique="true" />
+		
+	</class>
+</hibernate-mapping>
