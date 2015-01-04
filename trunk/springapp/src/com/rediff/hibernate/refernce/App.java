@@ -12,7 +12,7 @@ import com.rediff.minton.HibernateUtil;
 public class App {
 	public static void main(String[] args) {
 		System.out.println("Hibernate many to many (XML Mapping)");
-		onetomany();
+		manytomany();
 		System.out.println("Done");
 	}
 
@@ -138,6 +138,52 @@ public class App {
 				student.setName("samar");
 			}
 			student.setPhone_set(phone_set);
+			session.save(student);
+
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void manytomany() {
+		try {
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+
+			// 1:M save phone
+			Set<Syllabus> syllabus_set = new HashSet<Syllabus>();
+			Syllabus s1 = new Syllabus();
+			s1.setName("java");
+			session.save(s1);
+
+			Syllabus s2 = new Syllabus();
+			s2.setName("c++");
+			session.save(s2);
+
+			syllabus_set.add(s1);
+			syllabus_set.add(s2);
+
+			// save student
+			Criteria criteria = session.createCriteria(Student.class);
+			criteria.add(Restrictions.eq("name", "samar"));
+			Student student = (Student) criteria.uniqueResult();
+			if (student == null) {
+				student = new Student();
+				student.setName("samar");
+			}
+			student.setSyllabus_set(syllabus_set);
+			session.save(student);
+
+			criteria = session.createCriteria(Student.class);
+			criteria.add(Restrictions.eq("name", "vivek"));
+			student = (Student) criteria.uniqueResult();
+			if (student == null) {
+				student = new Student();
+				student.setName("vivek");
+			}
+			student.setSyllabus_set(syllabus_set);
 			session.save(student);
 
 			session.getTransaction().commit();

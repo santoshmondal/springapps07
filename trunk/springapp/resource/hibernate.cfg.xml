@@ -27,6 +27,7 @@
     	<mapping resource="com/rediff/hibernate/refernce/address.hbm.xml" />
     	<mapping resource="com/rediff/hibernate/refernce/company.hbm.xml" />
     	<mapping resource="com/rediff/hibernate/refernce/phone.hbm.xml" />
+    	<mapping resource="com/rediff/hibernate/refernce/syllabus.hbm.xml" />
     	
     	
 

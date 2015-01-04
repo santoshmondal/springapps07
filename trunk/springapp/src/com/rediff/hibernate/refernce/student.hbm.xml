@@ -25,6 +25,12 @@
 			<key column="sid" />
 			<many-to-many column="pid" class="com.rediff.hibernate.refernce.Phone" unique="true"/>
 		</set>
+		
+		<!-- M:N -->
+		<set name="syllabus_set" table="ref_student_syllabus">
+			<key column="sid" />
+			<many-to-many column="sy_id" class="com.rediff.hibernate.refernce.Syllabus" />
+		</set>
 
 	</class>
 </hibernate-mapping>
