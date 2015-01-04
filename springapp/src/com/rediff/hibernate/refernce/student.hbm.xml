@@ -3,20 +3,28 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.rediff.hibernate.refernce.Student" table="ref_student" >
-        <id name="sid">
-            <generator class="identity" />
-        </id>
-        
-        <property name="name" type="string" not-null="true" unique="true" />
-        <property name="mname" type="string" />
-        <property name="lname" type="string" />
+	<class name="com.rediff.hibernate.refernce.Student" table="ref_student">
+		<id name="sid">
+			<generator class="identity" />
+		</id>
 
-        <!-- 1:1 -->
-        <many-to-one name="address" class="com.rediff.hibernate.refernce.Address" unique="true" />
-        
-        <!-- M:1 -->
-        <many-to-one name="company" class="com.rediff.hibernate.refernce.Company" />
-         
-    </class>
+		<property name="name" type="string" not-null="true" unique="true" />
+		<property name="mname" type="string" />
+		<property name="lname" type="string" />
+
+		<!-- 1:1 -->
+		<many-to-one name="address" class="com.rediff.hibernate.refernce.Address"
+			unique="true" />
+
+		<!-- M:1 -->
+		<many-to-one name="company" class="com.rediff.hibernate.refernce.Company" />
+
+
+		<!-- 1:M -->
+		<set name="phone_set" table="ref_student_company">
+			<key column="sid" />
+			<many-to-many column="pid" class="com.rediff.hibernate.refernce.Phone" unique="true"/>
+		</set>
+
+	</class>
 </hibernate-mapping>
