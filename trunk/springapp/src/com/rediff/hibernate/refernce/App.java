@@ -37,27 +37,27 @@ public class App {
 			Session session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
+			// 1:1 save address
+			Criteria criteria = session.createCriteria(Address.class);
+			criteria.add(Restrictions.eq("city", "mumbai"));
+
+			Address address = (Address) criteria.uniqueResult();
+			if (address == null) {
+				address = new Address();
+				address.setCity("mumbai");
+				session.save(address);
+			}
+
 			// save student
-			Criteria criteria = session.createCriteria(Student.class);
+			criteria = session.createCriteria(Student.class);
 			criteria.add(Restrictions.eq("name", "samar"));
 			Student student = (Student) criteria.uniqueResult();
 			if (student == null) {
 				student = new Student();
 				student.setName("samar");
 			}
-			session.save(student);
 
-			// 1:1 save address
-			criteria = session.createCriteria(Address.class);
-			criteria.add(Restrictions.eq("city", "mumbai"));
-			Address uniqueResult = (Address) criteria.uniqueResult();
-			if (uniqueResult == null) {
-				uniqueResult = new Address();
-				uniqueResult.setCity("mumbai");
-				session.save(uniqueResult);
-			}
-
-			student.setAddress(uniqueResult);
+			student.setAddress(address);
 			session.save(student);
 
 			session.getTransaction().commit();
